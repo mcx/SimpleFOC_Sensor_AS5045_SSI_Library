@@ -22,6 +22,7 @@ void AS5045_SSI::init()
     pinMode(ssi_clock_pin, OUTPUT);
     digitalWrite(ssi_chip_select_pin, HIGH);
     digitalWrite(ssi_clock_pin, HIGH);
+    delayMicroseconds(2);
 
     // velocity calculation init
     angle_prev = 0;
@@ -134,9 +135,6 @@ word AS5045_SSI::read()
     word raw_value = 0;
     uint16_t inputstream = 0;
     uint16_t c;
-    digitalWrite(ssi_chip_select_pin, HIGH);
-    digitalWrite(ssi_clock_pin, HIGH);
-    delayMicroseconds(2);
     digitalWrite(ssi_chip_select_pin, LOW);
     delayMicroseconds(2);
     digitalWrite(ssi_clock_pin, LOW);
@@ -150,6 +148,9 @@ word AS5045_SSI::read()
         digitalWrite(ssi_clock_pin, LOW);
         delayMicroseconds(2);
     }
+    digitalWrite(ssi_clock_pin, HIGH);
+    delayMicroseconds(2);
+    digitalWrite(ssi_chip_select_pin, HIGH);
     return raw_value;
 }
 

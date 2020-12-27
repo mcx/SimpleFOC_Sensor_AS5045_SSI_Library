@@ -121,7 +121,7 @@ int AS5045_SSI::needsAbsoluteZeroSearch()
 // function reading the raw counter of the magnetic sensor
 int AS5045_SSI::getRawCount()
 {
-    return (int)AS5045_SSI::read();
+    return (int)(AS5045_SSI::read() >> 6);
 }
 
 /*
@@ -150,7 +150,7 @@ word AS5045_SSI::read()
         digitalWrite(ssi_clock_pin, LOW);
         delayMicroseconds(2);
     }
-    return raw_value >> 6;
+    return raw_value;
 }
 
 /**

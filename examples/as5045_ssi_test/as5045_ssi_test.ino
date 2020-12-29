@@ -1,5 +1,5 @@
 #include <SimpleFOC.h>
-#include <SimpleFOC_AS5045_SSI.h>
+#include <AS5045_SSI.h>
 
 AS5045_SSI sensor = AS5045_SSI(PA4, PA6, PA5);
 

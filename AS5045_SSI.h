@@ -1,5 +1,5 @@
-#ifndef _SIMPLEFOC_AS5045_SSI_H_
-#define _SIMPLEFOC_AS5045_SSI_H_
+#ifndef _AS5045_SSI_H_
+#define _AS5045_SSI_H_
 
 #include <Arduino.h>
 #include <SimpleFOC.h>
@@ -46,6 +46,7 @@ private:
     int ssi_chip_select_pin; //!< SSI chip select pin
     int ssi_clock_pin;       //!< SSI bit clock pin
     // SSI functions
+    void ssi_delay();
     /** Stop SSI communication */
     void close();
     /** Read SSI value */

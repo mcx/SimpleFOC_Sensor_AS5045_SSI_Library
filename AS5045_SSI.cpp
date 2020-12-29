@@ -1,4 +1,4 @@
-#include "SimpleFOC_AS5045_SSI.h"
+#include "AS5045_SSI.h"
 
 /**
  *  AS5045 SSI mode class constructor
@@ -125,6 +125,14 @@ int AS5045_SSI::getRawCount()
     return (int)(AS5045_SSI::read() >> 6);
 }
 
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+void AS5045_SSI::ssi_delay()
+{
+    for (int i = 0; i < 188; i++);
+}
+#pragma GCC pop_options
+
 /*
   * Read a register from the sensor
   * Takes the address of the register as a 16 bit word
@@ -136,20 +144,20 @@ word AS5045_SSI::read()
     uint16_t inputstream = 0;
     uint16_t c;
     digitalWrite(ssi_chip_select_pin, LOW);
-    delayMicroseconds(2);
+    AS5045_SSI::ssi_delay();
     digitalWrite(ssi_clock_pin, LOW);
-    delayMicroseconds(2);
+    AS5045_SSI::ssi_delay();
     for (c = 0; c < 18; c++)
     {
         digitalWrite(ssi_clock_pin, HIGH);
-        delayMicroseconds(2);
+        AS5045_SSI::ssi_delay();
         inputstream = digitalRead(ssi_data_out_pin);
         raw_value = ((raw_value << 1) + inputstream);
         digitalWrite(ssi_clock_pin, LOW);
-        delayMicroseconds(2);
+        AS5045_SSI::ssi_delay();
     }
     digitalWrite(ssi_clock_pin, HIGH);
-    delayMicroseconds(2);
+    AS5045_SSI::ssi_delay();
     digitalWrite(ssi_chip_select_pin, HIGH);
     return raw_value;
 }

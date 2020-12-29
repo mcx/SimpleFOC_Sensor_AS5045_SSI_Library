@@ -6,7 +6,7 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-SimpleFOC_AS5045_SSI    KEYWORD1
+AS5045_SSI  KEYWORD1
 AS5045_SSI  KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)

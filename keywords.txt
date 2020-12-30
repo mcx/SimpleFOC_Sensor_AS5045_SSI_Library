@@ -6,18 +6,16 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-AS5045_SSI  KEYWORD1
-AS5045_SSI  KEYWORD1
+AS5045_SSI	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-AS5045_SSI		KEYWORD2
-init		KEYWORD2
-getAngle		KEYWORD2
-getVelocity		KEYWORD2
-initRelativeZero  	KEYWORD2
-initAbsoluteZero		KEYWORD2
-hasAbsoluteZero 	KEYWORD2
+init	KEYWORD2
+getAngle	KEYWORD2
+getVelocity	KEYWORD2
+initRelativeZero	KEYWORD2
+initAbsoluteZero	KEYWORD2
+hasAbsoluteZero	KEYWORD2
 needsAbsoluteZeroSearch	KEYWORD2
 #######################################
 # Constants (LITERAL1)

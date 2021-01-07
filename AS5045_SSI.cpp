@@ -22,7 +22,7 @@ void AS5045_SSI::init()
     pinMode(ssi_clock_pin, OUTPUT);
     digitalWrite(ssi_chip_select_pin, HIGH);
     digitalWrite(ssi_clock_pin, HIGH);
-    delayMicroseconds(2);
+//    delayMicroseconds(2);
 
     // velocity calculation init
     angle_prev = 0;
@@ -129,7 +129,9 @@ int AS5045_SSI::getRawCount()
 #pragma GCC optimize("O0")
 void AS5045_SSI::ssi_delay()
 {
-    for (int i = 0; i < 188; i++);
+#if defined(_STM32_DEF_)
+    for (int i=0; i<5; i++);
+#endif
 }
 #pragma GCC pop_options
 
@@ -143,22 +145,44 @@ word AS5045_SSI::read()
     word raw_value = 0;
     uint16_t inputstream = 0;
     uint16_t c;
+
+    digitalWrite(ssi_chip_select_pin, HIGH);
+    digitalWrite(ssi_clock_pin, HIGH);
+
+#if !defined(__AVR_ATmega328P__) && !defined(__AVR_ATmega168__) && !defined(__AVR_ATmega2560__)
+    AS5045_SSI::ssi_delay();
+#endif
+
     digitalWrite(ssi_chip_select_pin, LOW);
+
+#if !defined(__AVR_ATmega328P__) && !defined(__AVR_ATmega168__) && !defined(__AVR_ATmega2560__)
     AS5045_SSI::ssi_delay();
+#endif
+
     digitalWrite(ssi_clock_pin, LOW);
+
+#if !defined(__AVR_ATmega328P__) && !defined(__AVR_ATmega168__) && !defined(__AVR_ATmega2560__)
     AS5045_SSI::ssi_delay();
+#endif
+
     for (c = 0; c < 18; c++)
     {
         digitalWrite(ssi_clock_pin, HIGH);
+
+#if !defined(__AVR_ATmega328P__) && !defined(__AVR_ATmega168__) && !defined(__AVR_ATmega2560__)
         AS5045_SSI::ssi_delay();
+#endif
+
         inputstream = digitalRead(ssi_data_out_pin);
         raw_value = ((raw_value << 1) + inputstream);
+
         digitalWrite(ssi_clock_pin, LOW);
+
+#if !defined(__AVR_ATmega328P__) && !defined(__AVR_ATmega168__) && !defined(__AVR_ATmega2560__)
         AS5045_SSI::ssi_delay();
+#endif
     }
-    digitalWrite(ssi_clock_pin, HIGH);
-    AS5045_SSI::ssi_delay();
-    digitalWrite(ssi_chip_select_pin, HIGH);
+    
     return raw_value;
 }
 

@@ -130,7 +130,7 @@ int AS5045_SSI::getRawCount()
 void AS5045_SSI::ssi_delay()
 {
 #if defined(_STM32_DEF_)
-    for (int i=0; i<5; i++);
+    for (int i = 0; i < 2; i++);
 #endif
 }
 #pragma GCC pop_options

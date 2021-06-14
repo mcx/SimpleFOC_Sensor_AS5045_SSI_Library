@@ -23,21 +23,6 @@ public:
     float getAngle() override;
     /** get current angular velocity (rad/s) **/
     float getVelocity() override;
-    /**
-     *  set current angle as zero angle 
-     * return the angle [rad] difference
-     */
-    float initRelativeZero() override;
-    /**
-     *  set absolute zero angle as zero angle
-     * return the angle [rad] difference
-     */
-    float initAbsoluteZero() override;
-    /** returns 1 because it is the absolute sensor */
-    int hasAbsoluteZero() override;
-    /** returns 0  maning it doesn't need search for absolute zero */
-
-    int needsAbsoluteZeroSearch() override;
 
 private:
     float cpr; //!< Maximum range of the magnetic sensor
@@ -52,7 +37,6 @@ private:
     /** Read SSI value */
     word read();
 
-    word zero_offset; //!< user defined zero offset
     /**
      * Function getting current angle register value
      * it uses angle_register variable
